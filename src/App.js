@@ -7,9 +7,9 @@
 //     )
 //   }
 // }
-import { useState } from 'react'
-import Header from './components/Header'
-import Tasks from './components/Tasks'
+import { useState } from "react";
+import Header from "./components/Header";
+import Tasks from "./components/Tasks";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -31,22 +31,31 @@ function App() {
       day: "Feb 5th at 2:30pm",
       reminder: false,
     },
-  ])
+  ]);
 
   //delete task
-
   const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id))
-  }
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+  //toggle reminder
+  const toggleReminder = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    );
+  };
 
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} onDelete={deleteTask} />
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+      ) : (
+        "All Tasks Completed"
+      )}
     </div>
   );
 }
-
-
 
 export default App;
