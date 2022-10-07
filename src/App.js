@@ -100,12 +100,10 @@ function App() {
           onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask}
         />
-
+        <Routes>
         <Route
-          path="/"
-          exact
-          render={(props) => (
-            <>
+          path="/"          
+          element={            <>
               {showAddTask && <AddTask onAdd={addTask} />}
               {tasks.length > 0 ? (
                 <Tasks
@@ -117,9 +115,10 @@ function App() {
                 "All Tasks Completed"
               )}
             </>
-          )}
+          }
         />
-        <Route path="/about" component={About} />
+        <Route path="/about" element={<About />} />
+        </Routes>
         <Footer />
       </div>
     </Router>
